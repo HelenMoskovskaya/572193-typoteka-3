@@ -1,7 +1,7 @@
 # Личный проект «Типотека» [![Build status][travis-image]][travis-url]
 
 * Студент: [Helen Moskovskaya](https://up.htmlacademy.ru/nodejs/3/user/572193).
-* Наставник: `Артем Макаров`.
+* Наставник: [Артем Макаров](https://htmlacademy.ru/profile/deepsick).
 
 ---
 
