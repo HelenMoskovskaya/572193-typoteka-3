@@ -1,30 +1,40 @@
 'use strict';
 
+const fs = require(`fs`);
+
 const {
   shuffle,
   getRandomInt
 } = require(`../../utils`);
 
 const {
-  TITLES,
-  SENTENCES,
-  CATEGORIES,
-  createDate,
-  MAX_ANNOUNCE_SENTENCES,
+  MAX_ANNOUNCE_COUNT,
   DEFAULT_COUNT,
   FILE_MOCKS_NAME,
   ExitCode,
+  MAX_PUBLICATION_COUNT,
 } = require(`../../constants`);
 
-const fs = require(`fs`);
+const {
+  TITLES,
+  SENTENCES,
+  CATEGORIES,
+} = require(`../../data`);
 
+
+const currentDate = new Date();
+
+const createDatePublication = {
+  minDate: currentDate.getTime(),
+  maxDate: new Date(currentDate.setMonth(currentDate.getMonth() - 3))
+};
 
 const generatePublications = (count) => (
   Array(count).fill({}).map(() => ({
     title: TITLES[getRandomInt(0, TITLES.length - 1)],
-    announce: shuffle(SENTENCES).slice(0, MAX_ANNOUNCE_SENTENCES).join(``),
+    announce: shuffle(SENTENCES).slice(0, MAX_ANNOUNCE_COUNT).join(``),
     fullText: shuffle(SENTENCES).slice(0, getRandomInt(1, SENTENCES.length - 1)).join(``),
-    createdDate: new Date(getRandomInt(createDate.MIN_DATE_PUBLICATION, createDate.MAX_DATE_PUBLICATION)).toLocaleString(),
+    createdDate: new Date(getRandomInt(createDatePublication.minDate, createDatePublication.maxDate)).toLocaleString(),
     сategory: shuffle(CATEGORIES).slice(0, getRandomInt(1, CATEGORIES.length - 1)),
   }))
 );
@@ -37,7 +47,7 @@ module.exports = {
     const countPublications = Number.parseInt(count, 10) || DEFAULT_COUNT;
     const content = JSON.stringify(generatePublications(countPublications));
 
-    if (countPublications > 1000) {
+    if (countPublications > MAX_PUBLICATION_COUNT) {
       console.info(`Не больше 1000 объявлений.`);
       process.exit(ExitCode.ERROR);
     }
