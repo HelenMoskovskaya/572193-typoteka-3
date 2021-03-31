@@ -15,13 +15,10 @@ const {
   FILE_MOCKS_NAME,
   ExitCode,
   MAX_PUBLICATION_COUNT,
+  FILE_SENTENCES_PATH,
+  FILE_TITLES_PATH,
+  FILE_CATEGORIES_PATH,
 } = require(`../../constants`);
-
-const {
-  TITLES,
-  SENTENCES,
-  CATEGORIES,
-} = require(`../../data`);
 
 
 const currentDate = new Date();
@@ -31,23 +28,37 @@ const createDatePublication = {
   maxDate: new Date(currentDate.setMonth(currentDate.getMonth() - 3))
 };
 
-const generatePublications = (count) => (
+const generatePublications = (count, titles, categories, sentences) => (
   Array(count).fill({}).map(() => ({
-    title: TITLES[getRandomInt(0, TITLES.length - 1)],
-    announce: shuffle(SENTENCES).slice(0, MAX_ANNOUNCE_COUNT).join(``),
-    fullText: shuffle(SENTENCES).slice(0, getRandomInt(1, SENTENCES.length - 1)).join(``),
+    title: titles[getRandomInt(0, titles.length - 1)],
+    announce: shuffle(sentences).slice(0, MAX_ANNOUNCE_COUNT).join(``),
+    fullText: shuffle(sentences).slice(0, getRandomInt(1, sentences.length - 1)).join(``),
     createdDate: new Date(getRandomInt(createDatePublication.minDate, createDatePublication.maxDate)).toLocaleString(),
-    сategory: shuffle(CATEGORIES).slice(0, getRandomInt(1, CATEGORIES.length - 1)),
+    сategory: shuffle(categories).slice(0, getRandomInt(1, categories.length - 1)),
   }))
 );
+
+const readContent = async (filePath) => {
+  try {
+    const content = await fs.readFile(filePath, `utf8`);
+    return content.split(`\n`);
+  } catch (error) {
+    console.error(chalk.red(error));
+    return [];
+  }
+};
 
 
 module.exports = {
   name: `--generate`,
   async run(args) {
+    const sentences = await readContent(FILE_SENTENCES_PATH);
+    const titles = await readContent(FILE_TITLES_PATH);
+    const categories = await readContent(FILE_CATEGORIES_PATH);
+
     const [count] = args;
     const countPublications = Number.parseInt(count, 10) || DEFAULT_COUNT;
-    const content = JSON.stringify(generatePublications(countPublications));
+    const content = JSON.stringify(generatePublications(countPublications, titles, categories, sentences));
 
     if (countPublications > MAX_PUBLICATION_COUNT) {
       console.info(chalk.red(`Не больше 1000 объявлений.`));

@@ -10,6 +10,9 @@ const ExitCode = {
   ERROR: 1,
   SUCCESS: 0,
 };
+const FILE_SENTENCES_PATH = `./data/sentences.txt`;
+const FILE_TITLES_PATH = `./data/titles.txt`;
+const FILE_CATEGORIES_PATH = `./data/categories.txt`;
 
 
 module.exports = {
@@ -20,4 +23,7 @@ module.exports = {
   MAX_PUBLICATION_COUNT,
   ExitCode,
   MAX_ANNOUNCE_COUNT,
+  FILE_SENTENCES_PATH,
+  FILE_TITLES_PATH,
+  FILE_CATEGORIES_PATH,
 };
