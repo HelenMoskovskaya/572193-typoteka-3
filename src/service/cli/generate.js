@@ -41,7 +41,7 @@ const generatePublications = (count, titles, categories, sentences) => (
 const readContent = async (filePath) => {
   try {
     const content = await fs.readFile(filePath, `utf8`);
-    return content.split(`\n`);
+    return content.split(`\n`).slice(0, -1);
   } catch (error) {
     console.error(chalk.red(error));
     return [];
