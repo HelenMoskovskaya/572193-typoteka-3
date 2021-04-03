@@ -14,6 +14,7 @@ const FILE_SENTENCES_PATH = `./data/sentences.txt`;
 const FILE_TITLES_PATH = `./data/titles.txt`;
 const FILE_CATEGORIES_PATH = `./data/categories.txt`;
 const DEFAULT_PORT = 3000;
+const DEFAULT_EXPRESS_PORT = 8080;
 const HttpCode = {
   OK: 200,
   NOT_FOUND: 404,
@@ -36,4 +37,5 @@ module.exports = {
   FILE_CATEGORIES_PATH,
   DEFAULT_PORT,
   HttpCode,
+  DEFAULT_EXPRESS_PORT,
 };
