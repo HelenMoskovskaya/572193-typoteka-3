@@ -22,6 +22,7 @@ const HttpCode = {
   FORBIDDEN: 403,
   UNAUTHORIZED: 401,
 };
+const PUBLIC_DIR = `public`;
 
 
 module.exports = {
@@ -38,4 +39,5 @@ module.exports = {
   DEFAULT_PORT,
   HttpCode,
   DEFAULT_EXPRESS_PORT,
+  PUBLIC_DIR,
 };
