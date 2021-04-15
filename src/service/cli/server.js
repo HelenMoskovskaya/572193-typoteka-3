@@ -3,19 +3,18 @@
 const express = require(`express`);
 const chalk = require(`chalk`);
 
+const routes = require(`../api`);
 const {
   DEFAULT_PORT,
   HttpCode,
 } = require(`../../constants`);
-
-const postsRoutes = require(`../routes/posts-routes`);
 
 
 const app = express();
 
 app.use(express.json());
 
-app.use(`/`, postsRoutes);
+app.use(`/api`, routes);
 
 app.use((req, res) => res
   .status(HttpCode.NOT_FOUND)
