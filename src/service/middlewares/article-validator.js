@@ -5,12 +5,11 @@ const {HttpCode} = require(`../../constants`);
 
 const articleKeys = [
   `title`,
-  `createdDate`,
-  `category`,
   `announce`,
   `fullText`,
-  `comments`];
-
+  `createdDate`,
+  `сategory`
+];
 
 module.exports = (req, res, next) => {
   const newArticle = req.body;
@@ -20,7 +19,7 @@ module.exports = (req, res, next) => {
   if (!keyExists) {
     res.status(HttpCode.BAD_REQUEST)
       .send(`Bad request`);
+  } else {
+    next();
   }
-
-  return next();
 };

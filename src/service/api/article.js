@@ -83,7 +83,7 @@ module.exports = (app, articleService, commentService) => {
     return res.status(HttpCode.OK).json(deleteComment);
   });
 
-  route.post(`/:articleId/comments`, [articleExist(articleValidator), commentValidator], (req, res) => {
+  route.post(`/:articleId/comments`, [articleExist(articleService), commentValidator], (req, res) => {
     const {article} = res.locals;
     const comment = commentService.create(article, req.body);
 

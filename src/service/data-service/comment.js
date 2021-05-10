@@ -20,7 +20,7 @@ class CommentService {
   }
 
   remove(article, commentId) {
-    const dropComment = article.comments.find((item) => item === commentId);
+    const dropComment = article.comments.find((item) => item.id === commentId);
 
     if (!dropComment) {
       return null;
