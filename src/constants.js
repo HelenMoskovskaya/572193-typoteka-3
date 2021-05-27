@@ -28,7 +28,13 @@ const HttpCode = {
 };
 
 const PUBLIC_DIR = `public`;
+const API_PREFIX = `/api`;
 const MAX_ID_LENGTH = 6;
+
+const Env = {
+  DEVELOPMENT: `development`,
+  PRODUCTION: `production`
+};
 
 
 module.exports = {
@@ -49,4 +55,6 @@ module.exports = {
   PUBLIC_DIR,
   MAX_ID_LENGTH,
   MAX_COMMENTS,
+  API_PREFIX,
+  Env,
 };
